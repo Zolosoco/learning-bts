@@ -1,0 +1,22 @@
+{
+  "name": "one",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zolosoco/learning-bts.git"
+  },
+  "keywords": [
+    "n00b"
+  ],
+  "author": "zolosoco",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Zolosoco/learning-bts/issues"
+  },
+  "homepage": "https://github.com/Zolosoco/learning-bts#readme",
+  "description": ""
+}
