@@ -18,5 +18,8 @@
     "url": "https://github.com/Zolosoco/learning-bts/issues"
   },
   "homepage": "https://github.com/Zolosoco/learning-bts#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
 }
