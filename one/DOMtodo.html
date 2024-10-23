@@ -1,0 +1,116 @@
+<!-- Using DOM to create an in memory todo application -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODOs</title>
+</head>
+<body>
+    <h1>Task List</h1>
+    <input type="text" name="" class="user-input"></input>
+    <button type="submit" class="add-button">Add Task</button>
+    <button type="submit" class="reset-button">Clear All</button>
+
+    
+</body>
+<script>
+    //dynamically creating ul elements containing todos
+    function render(){
+
+        const ul = document.createElement('ul');
+        
+        const li = document.createElement('li');
+        ul.appendChild(li);
+
+        const text = userInput();
+
+        if(text){
+            li.textContent = text;
+
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.className = 'edit-button';
+            li.append(editButton);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Remove';
+            deleteButton.className = 'delete-button';
+            li.appendChild(deleteButton);
+
+            document.body.appendChild(ul);
+        };
+
+
+    };
+
+
+    
+    function userInput(){
+        const input = document.querySelector(".user-input");
+        return input.value.trim() ;
+
+    };
+
+    function clearInput(){
+         return document.querySelector('input').value = '';
+    };
+
+
+    //Event delegation:
+
+    document.body.addEventListener('click', function(event){
+        event.preventDefault();
+
+        
+        const target = event.target;
+
+        if(target.className === 'add-button'){
+            render()
+            clearInput();
+
+        } else if(target.className === 'edit-button'){
+            const listItem = target.closest('li');
+            if(listItem){
+                const newText = prompt('Edit Task', listItem.firstChild.textContent)
+                if(newText !== ""){
+                    listItem.firstChild.textContent = newText.trim()
+                }
+            } 
+        }else if(target.className === 'delete-button'){
+                const ulToRemove = target.closest('ul');
+              
+                if(ulToRemove){
+                    ulToRemove.remove();              
+                }
+        }else if(target.className === 'reset-button'){
+            const allTasks = document.querySelectorAll('ul');
+
+            if(allTasks.length > 0){
+                if(confirm('Are you sure you want to clear all the tasks ?')){
+                    allTasks.forEach(task => task.remove()); //remove all ul elements
+                };
+            };
+
+        }
+        
+
+    });
+
+    ( function enterKeyEvent(){
+        document.querySelector('input').addEventListener('keydown', function(event){
+            // event.preventDefault();
+            if (event.key == 'Enter'){
+                render();
+                clearInput();}
+        })
+    }
+    )();
+
+
+
+
+
+</script>
+</html>
