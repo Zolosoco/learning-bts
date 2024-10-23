@@ -16,7 +16,7 @@
     
 </body>
 <script>
-    //dynamically creating ul elements containing todos
+    //dynamically creating ul elements containing list, edit, delete buttons when text is input
     function render(){
 
         const ul = document.createElement('ul');
@@ -46,24 +46,25 @@
     };
 
 
-    
+    // function to retun userinput
     function userInput(){
         const input = document.querySelector(".user-input");
         return input.value.trim() ;
 
     };
-
+    // function to clear input-field
     function clearInput(){
          return document.querySelector('input').value = '';
     };
 
 
-    //Event delegation:
+    //Event delegation instead of attaching eventlistener to each button listening on body for clicks
+    // more optimal:
 
     document.body.addEventListener('click', function(event){
         event.preventDefault();
 
-        
+        // 
         const target = event.target;
 
         if(target.className === 'add-button'){
@@ -71,7 +72,7 @@
             clearInput();
 
         } else if(target.className === 'edit-button'){
-            const listItem = target.closest('li');
+            const listItem = target.closest('li'); //closest method event.target.closest
             if(listItem){
                 const newText = prompt('Edit Task', listItem.firstChild.textContent)
                 if(newText !== ""){
@@ -85,7 +86,7 @@
                     ulToRemove.remove();              
                 }
         }else if(target.className === 'reset-button'){
-            const allTasks = document.querySelectorAll('ul');
+            const allTasks = document.querySelectorAll('ul'); //querySelectorAll returns a NodeList, which has methods alike arrays, but not an array!
 
             if(allTasks.length > 0){
                 if(confirm('Are you sure you want to clear all the tasks ?')){
@@ -98,6 +99,7 @@
 
     });
 
+    //listening in on enter key press to submit input data: with iffie
     ( function enterKeyEvent(){
         document.querySelector('input').addEventListener('keydown', function(event){
             // event.preventDefault();
